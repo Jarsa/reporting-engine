@@ -21,7 +21,7 @@
                     invisible="state != 'sql_valid'"
                     type="object"
                     class="oe_highlight"
-                    icon="fa-arrow-right text-success"
+                    icon="arrow_forward"
                 />
                 <button
                     name="configure_properties"
@@ -29,7 +29,7 @@
                     string="Configure Properties"
                     type="object"
                     class="oe_highlight"
-                    icon="fa-arrow-right text-success"
+                    icon="arrow_forward"
                 />
             </xpath>
             <group name="group_main_info" position="inside">
@@ -70,7 +70,7 @@
                     string="Execute Query"
                     invisible="state != 'sql_valid'"
                     type="object"
-                    icon="fa-arrow-right text-success"
+                    icon="arrow_forward"
                 />
             </field>
         </field>

@@ -2,8 +2,6 @@
 # @author: Florian da Costa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from datetime import datetime
-
 from odoo import fields, models
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
@@ -28,7 +26,7 @@ class SqlFileWizard(models.TransientModel):
         properties = self.read(["query_properties"])[0]["query_properties"]
 
         # Check properties
-        bad_props = [x for x in properties if not x["value"]]
+        bad_props = [x for x in properties if not x.get("value")]
         if bad_props:
             raise UserError(
                 self.env._(
@@ -41,7 +39,7 @@ class SqlFileWizard(models.TransientModel):
 
         # Manage Params
         variable_dict = {}
-        now_tz = fields.Datetime.context_timestamp(sql_export, datetime.now())
+        now_tz = fields.Datetime.context_timestamp(sql_export, fields.Datetime.now())
         date = now_tz.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
         for prop in properties:
             if prop["type"] == "many2many":

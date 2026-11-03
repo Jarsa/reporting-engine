@@ -2,8 +2,6 @@
 # @author: Florian da Costa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import base64
-
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, tagged
 
@@ -31,7 +29,7 @@ class TestExportSqlQuery(TransactionCase):
             }
         )
         wizard.export_sql()
-        export = base64.b64decode(wizard.binary_file).decode("utf-8")
+        export = wizard.binary_file.decode("utf-8")
         self.assertEqual(export.split(";")[0], "name")
         self.assertTrue(len(export.split(";")) > 6)
 
@@ -142,5 +140,20 @@ class TestExportSqlQuery(TransactionCase):
             }
         )
         wizard.export_sql()
-        export = base64.b64decode(wizard.binary_file)
+        export = wizard.binary_file.content
         self.assertTrue(export)
+
+    def test_sql_query_with_unset_params(self):
+        query = self.sql_export_obj.create(
+            {
+                "name": "Export Partners With Unset Variables (Test)",
+                "query": "SELECT id FROM res_partner WHERE id = %(ID)s",
+                "query_properties_definition": [
+                    {"name": "907ac618eccbab74", "type": "integer", "string": "ID"},
+                ],
+            }
+        )
+        query.write({"state": "sql_valid"})
+        wizard = self.wizard_obj.create({"sql_export_id": query.id})
+        with self.assertRaises(UserError):
+            wizard.export_sql()

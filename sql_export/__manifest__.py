@@ -4,7 +4,7 @@
 
 {
     "name": "SQL Export",
-    "version": "19.0.1.1.1",
+    "version": "20.0.1.0.0",
     "author": "Akretion,GRAP,Odoo Community Association (OCA)",
     "maintainers": ["legalsylvain", "florian-dacosta"],
     "website": "https://github.com/OCA/reporting-engine",
@@ -18,8 +18,7 @@
     "data": [
         "views/sql_export_view.xml",
         "wizard/wizard_file_view.xml",
-        "security/sql_export_security.xml",
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
     ],
     "demo": [
         "demo/sql_export.xml",
