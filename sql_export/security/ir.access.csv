@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_sql_export_all,access_sql_export_all,sql.export,sql_request_abstract.group_sql_request_user,r,
+access_sql_export_editor,access_sql_export_editor,sql.export,sql_request_abstract.group_sql_request_manager,crud,
+access_sql_file_wizard,access_sql_file_wizard,sql.file.wizard,sql_request_abstract.group_sql_request_user,cru,
+sql_export_restric_access_user_or_group,SQL Export users and groups rules,sql.export,,r,"['|', ('user_ids', '=', user.id), ('group_ids', 'in', user.all_group_ids.ids)]"
